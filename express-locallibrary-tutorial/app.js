@@ -14,6 +14,8 @@ const limiter = RateLimit({
   max: 20,
 });
 
+require('dotenv').config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const catalogRouter = require('./routes/catalog');
@@ -24,8 +26,7 @@ var app = express();
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
 
-const dev_db_url = "mongodb+srv://test-user:testuser123@cluster0.1voce.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-const mongoDB = process.env.mongoDB_URL || dev_db_url;
+const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
 
 main().catch((err) => console.log(err));
 async function main() {
